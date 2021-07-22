@@ -11,7 +11,7 @@ Usage
 -----
 
 ```
- pip install opencv-python numpy keras tensorflow
- # then...
+ pip3 install opencv-python numpy keras tensorflow
+ # then:
  ./recognition-runner.py   # Opens video feed
 ```
