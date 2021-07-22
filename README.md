@@ -6,3 +6,12 @@ This program makes use of [Cascade Classifier Training (CCT)](https://www.resear
 The code uses pretrained Haar Cascade models to detect faces in the live feed. The necessary XML file is loaded using the CascadeClassifier loading method. The detection is then performed by the detectMultiScale method, which returns boundary rectangles for the detected face. Since the Haar Cascade function is trained on images in grayscale, the code also converts each frame from the feed into grayscale - these are then cropped for the faces in the image. 
 
 Some more information on the method used can be found in this helpful video on [OpenCV Face Detection](https://vimeo.com/12774628)
+
+Usage
+-----
+
+```
+ pip install opencv-python numpy keras tensorflow
+ # then...
+ ./recognition-runner.py   # Opens video feed
+```
