@@ -1,7 +1,7 @@
 '''
-Application runner my facial expression
+Application runner for my facial expression
 recognition program. Dependencies:
-pip install opencv-python, numpy, keras, tensorflow
+pip install opencv-python numpy keras tensorflow
 
 Last write: 22-07-2021
 user: j-a-collins
@@ -16,7 +16,7 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 video_capture = cv2.VideoCapture(0)
 model = model_from_json(open("facial_expression_model_structure.json", "r").read())
 model.load_weights('facial_expression_model_weights.h5')
-emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
+emotions = ('angry', 'disgusted', 'fear', 'happy', 'sad', 'surprised', 'neutral')
 
 while True:
     ret, img = video_capture.read()
