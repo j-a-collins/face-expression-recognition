@@ -1,5 +1,5 @@
 # face-expression-recognition
-A small ML program that makes use of tensorflow and OpenCV for recognition of facial expressions.
+A small ML program that makes use of keras/tensorflow and OpenCV for recognition of facial expressions.
 
 This program makes use of [Cascade Classifier Training (CCT)](https://www.researchgate.net/publication/220660094_Robust_Real-Time_Face_Detection). 
 
