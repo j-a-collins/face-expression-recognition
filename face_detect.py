@@ -9,7 +9,7 @@ Author: J-A-Collins
 import cv2
 import os
 
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+face_cascade = cv2.CascadeClassifier("haarcascade_fface_def.xml")
 
 
 def detect_faces(img, draw_box=True):

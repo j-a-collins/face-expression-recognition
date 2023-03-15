@@ -15,7 +15,8 @@ import cv2
 import utils
 import collections
 from keras.models import load_model
-import face_detection
+from face_detect import detect_faces
+
 
 # Constants and variables
 IDENTITY_THRESHOLD = 0.3
@@ -34,12 +35,16 @@ def process_image(img):
         img: (numpy.ndarray)
             The input image to be preprocessed.
         
-    Returns:
+    Returns
+    -------
         numpy.ndarray: 
             The preprocessed image ready to be fed to the neural network.
 
     """
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # Check if the input image has 3 channels (BGR)
+    if img.shape[-1] == 3:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
     img = img.astype("float32") / 255
     img = cv2.resize(img, (92, 112))
     img = img.reshape(1, img.shape[0], img.shape[1], 1)
@@ -84,7 +89,7 @@ while True:
     _, frame = video_capture.read()
 
     # Detect Faces
-    frame, face_img, face_coords = face_detection.detect_faces(frame, draw_box=False)
+    frame, face_img, face_coords = detect_faces(frame, draw_box=False)
 
     if face_img is not None:
         face_img = process_image(face_img)
@@ -115,4 +120,3 @@ while True:
 # Release capture:
 video_capture.release()
 cv2.destroyAllWindows()
-print("Face recog system complete.")

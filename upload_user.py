@@ -9,44 +9,26 @@ Author: J-A-Collins
 import cv2
 import math
 from utils import write_on_frame
-import face_detect
+from face_detect import detect_faces
 
 
-def capture_onboarding_image(countdown_time=5, file_name="onboarding_image.png"):
-    """
-    Capture an onboarding image using the default camera.
-    
-    Parameters
-    ----------
-        countdown_time:
-            Countdown time in seconds before capturing the image (default: 5)
+video_capture = cv2.VideoCapture(0)
+counter = 5
 
-        file_name:
-            Name of the file to save the captured image (default: 'onboarding_image.png')
-    
-    Returns
-    -------
-        None
+while True:
+    _, frame = video_capture.read()
+    frame, face_box, face_coords = detect_faces(frame)
+    text = 'Image will be taken in {}..'.format(math.ceil(counter))
+    if face_box is not None:
+        frame = write_on_frame(frame, text, face_coords[0], face_coords[1]-10)
+    cv2.imshow('Video', frame)
+    cv2.waitKey(1)
+    counter -= 0.1
+    if counter <= 0:
+        cv2.imwrite('true_img.png', face_box)
+        break
 
-    """
 
-    video_capture = cv2.VideoCapture(0)
-    try:
-        while True:
-            _, frame = video_capture.read()
-            frame, face_box, face_coords = detect_faces(frame)
-            text = f"Image will be taken in {math.ceil(countdown_time)}.."
-            if face_box is not None:
-                frame = write_on_frame(frame, text, face_coords[0], face_coords[1] - 10)
-            cv2.imshow("Video", frame)
-            cv2.waitKey(1)
-            countdown_time -= 0.1
-            if countdown_time <= 0:
-                cv2.imwrite(file_name, face_box)
-                break
-    except Exception as e:
-        print(f"Error: {e}")
-    finally:
-        video_capture.release()
-        cv2.destroyAllWindows()
-    print("User upload image complete.")
+video_capture.release()
+cv2.destroyAllWindows()
+print("User upload image complete.")
