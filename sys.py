@@ -47,6 +47,7 @@ def process_image(img):
 
 
 name = input("Enter user name: ")
+print(f"Hello {name}. Face recog system is now running. Press 'q' to quit.")
 
 # Validate model training process has completed:
 files = os.listdir()
@@ -114,3 +115,4 @@ while True:
 # Release capture:
 video_capture.release()
 cv2.destroyAllWindows()
+print("Face recog system complete.")
